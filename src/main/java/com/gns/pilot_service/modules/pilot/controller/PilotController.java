@@ -1,5 +1,6 @@
 package com.gns.pilot_service.modules.pilot.controller;
 
+import com.gns.pilot_service.modules.pilot.domain.dto.PilotBindAircraft;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotRequest;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotResponse;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotUpdateRequest;
@@ -47,5 +48,12 @@ public class PilotController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/{id}/bindAircraft") //@TODO alterar endpoint
+    public ResponseEntity<PilotResponse> bindAircraft(@PathVariable Long id,
+                                                    @RequestBody PilotBindAircraft pilotBindAircraft) {
+        PilotResponse response = service.bindAircraft(id, pilotBindAircraft);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

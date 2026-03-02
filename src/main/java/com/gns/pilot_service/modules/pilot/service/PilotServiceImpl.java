@@ -1,9 +1,12 @@
 package com.gns.pilot_service.modules.pilot.service;
 
+import com.gns.pilot_service.infra.clients.airdata.dto.AircraftDTO;
+import com.gns.pilot_service.modules.pilot.domain.dto.PilotBindAircraft;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotRequest;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotResponse;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotUpdateRequest;
 import com.gns.pilot_service.modules.pilot.domain.entity.Pilot;
+import com.gns.pilot_service.modules.pilot.gateway.AirdataGateway;
 import com.gns.pilot_service.modules.pilot.mapper.PilotMapper;
 import com.gns.pilot_service.modules.pilot.repository.PilotRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,6 +22,7 @@ public class PilotServiceImpl implements PilotService {
 
     private final PilotRepository repository;
     private final PilotMapper mapper;
+    private final AirdataGateway airdataGateway;
 
     @Override
     @Transactional
@@ -54,6 +58,21 @@ public class PilotServiceImpl implements PilotService {
     public void delete(Long id) {
         Pilot pilotToDelete = getByIdOrThrow(id);
         repository.delete(pilotToDelete);
+    }
+
+    @Override
+    public PilotResponse bindAircraft(Long id, PilotBindAircraft aircraftId) {
+        Pilot pilotToBind = getByIdOrThrow(id);
+
+        AircraftDTO aircraftDTO = airdataGateway.getAircraftClientById(aircraftId.id());
+
+        if(!(aircraftDTO == null)) {
+            pilotToBind.addAircraft(aircraftId.id());
+        }
+
+        repository.save(pilotToBind);
+
+        return mapper.toResponse(pilotToBind);
     }
 
     private Pilot getByIdOrThrow(Long id) {

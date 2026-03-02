@@ -24,4 +24,8 @@ public class Pilot {
     @CollectionTable(name = "pilot_aircraft", joinColumns = @JoinColumn(name = "pilot_id"))
     @Column(name = "aircraft_id")
     private List<Long> aircraftId;
+
+    public void addAircraft(Long aircraftId) {
+        this.aircraftId.add(aircraftId);
+    }
 }

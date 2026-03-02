@@ -19,3 +19,10 @@ logging:
   file:
     name: logs/dev-test.log
     path: logs
+  level:
+    com.gns.pilot_service.infra.clients.airdata.AirdataClient: DEBUG
+clients:
+  airdata:
+    url: http://localhost:8080
+    username: admin
+    password: admin
