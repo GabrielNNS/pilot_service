@@ -1,5 +1,6 @@
 server:
   port: 8081
+
 spring:
   datasource:
     url: ${DB_URL}
@@ -15,14 +16,16 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+
 logging:
   file:
     name: logs/dev-test.log
     path: logs
   level:
     com.gns.pilot_service.infra.clients.airdata.AirdataClient: DEBUG
+
 clients:
   airdata:
-    url: http://localhost:8080
+    url: http://localhost:8080/api/v1
     username: admin
     password: admin

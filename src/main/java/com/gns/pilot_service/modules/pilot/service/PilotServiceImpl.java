@@ -1,6 +1,6 @@
 package com.gns.pilot_service.modules.pilot.service;
 
-import com.gns.pilot_service.infra.clients.airdata.dto.AircraftDTO;
+import com.gns.pilot_service.infra.clients.airdata.dto.AircraftClientResponse;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotBindAircraft;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotRequest;
 import com.gns.pilot_service.modules.pilot.domain.dto.PilotResponse;
@@ -64,9 +64,9 @@ public class PilotServiceImpl implements PilotService {
     public PilotResponse bindAircraft(Long id, PilotBindAircraft aircraftId) {
         Pilot pilotToBind = getByIdOrThrow(id);
 
-        AircraftDTO aircraftDTO = airdataGateway.getAircraftClientById(aircraftId.id());
+        AircraftClientResponse aircraftClientResponse = airdataGateway.getAircraftClientById(aircraftId.id());
 
-        if(!(aircraftDTO == null)) {
+        if(!(aircraftClientResponse == null)) {
             pilotToBind.addAircraft(aircraftId.id());
         }
 

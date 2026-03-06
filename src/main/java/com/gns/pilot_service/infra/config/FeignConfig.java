@@ -9,15 +9,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FeignConfig {
 
-    //@TODO tentar exportar properties!
     @Bean
     public Logger.Level feignLoggerLevel() {
 
         return Logger.Level.FULL;
     }
 
-
-    //@TODO entender melhor para explicar!
     @Bean
     public BasicAuthRequestInterceptor basicAuthRequestInterceptor(
             @Value("${clients.airdata.username}") String username,

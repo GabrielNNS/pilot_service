@@ -1,9 +1,8 @@
 package com.gns.pilot_service.infra.clients.airdata.dto;
 
-//@TODO alterar nome do record
-public record AircraftDTO(
+public record AircraftClientResponse(
         Long id,
         String model,
-        OperatorDTO operatorDTO
+        OperatorClientResponse operatorClientResponse
 ) {
 }

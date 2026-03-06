@@ -50,7 +50,7 @@ public class PilotController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping("/{id}/bindAircraft") //@TODO alterar endpoint
+    @PutMapping("/{id}/aircraft") //@TODO alterar endpoint
     public ResponseEntity<PilotResponse> bindAircraft(@PathVariable Long id,
                                                     @RequestBody PilotBindAircraft pilotBindAircraft) {
         PilotResponse response = service.bindAircraft(id, pilotBindAircraft);
